@@ -19,13 +19,7 @@ jobs:
       - name: Azure Login
         uses: azure/login@v2
         with:
-          creds: |
-            {
-              "clientId": "${{ secrets.client_id }}",
-              "clientSecret": "${{ secrets.client_secret }}",
-              "subscriptionId": "${{ secrets.subscription_id }}",
-              "tenantId": "${{ secrets.tenant_id }}"
-            }
+         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       # Step 3: Build and Push Docker image to ACR
       - name: Build and Push Docker Image
