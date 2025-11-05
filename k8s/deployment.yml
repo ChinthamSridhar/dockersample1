@@ -12,7 +12,6 @@ spec:
       app: nginx-app
   template:
     metadata:
-      name: nginx-pod
       labels:
         app: nginx-app
     spec:
