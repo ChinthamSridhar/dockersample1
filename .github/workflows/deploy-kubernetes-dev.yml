@@ -1,0 +1,40 @@
+name: Deploy to AKS
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'k8s/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: practice_dev
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          creds: |
+            {
+              "clientId": "${{ secrets.client_id }}",
+              "clientSecret": "${{ secrets.client_secret }}",
+              "subscriptionId": "${{ secrets.subscription_id }}",
+              "tenantId": "${{ secrets.tenant_id }}"
+            }
+
+      - name: Set AKS Context
+        uses: azure/aks-set-context@v3
+        with:
+          resource-group: rg-practice-dev
+          cluster-name: kubernetes-practice-dev
+
+      - name: Deploy to AKS
+        run: |
+          kubectl apply -f k8s/
+          kubectl get pods
+          kubectl get svc
