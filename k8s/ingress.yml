@@ -5,8 +5,14 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
     nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
   ingressClassName: nginx
+  tls:
+  - hosts:
+      - myappdemo.eastus.cloudapp.azure.com
+    secretName: myappdemo-tls
   rules:
   - host: myappdemo.eastus.cloudapp.azure.com
     http:
