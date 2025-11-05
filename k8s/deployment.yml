@@ -20,4 +20,4 @@ spec:
        - name: nginx
          image: acrpracticedev.azurecr.io/my-nginx-app:4
          ports:
-           - containerPort: 80
+           - containerPort: 80 
