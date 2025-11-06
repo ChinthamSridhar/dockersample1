@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: acrpracticedev.azurecr.io/frontend:latest  # 👈 Update tag to latest
+          image: acrpracticedev.azurecr.io/frontend:7
           ports:
             - containerPort: 80
 ---
