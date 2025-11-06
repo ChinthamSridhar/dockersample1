@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>K8S Demo Project</title>
+</head>
+<body>
+  <h1>Welcome to K8S Demo Project</h1>
+  <form id="interestForm">
+    <label>Username:</label><br>
+    <input type="text" id="username" required><br><br>
+    <label>Phone:</label><br>
+    <input type="text" id="phone" required><br><br>
+    <label>
+      <input type="checkbox" id="interested"> Interested in learning K8s
+    </label><br><br>
+    <button type="submit">Submit</button>
+  </form>
+
+  <p id="response"></p>
+
+  <script>
+    document.getElementById('interestForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = {
+        username: document.getElementById('username').value,
+        phone: document.getElementById('phone').value,
+        interested: document.getElementById('interested').checked
+      };
+      const res = await fetch('/api/interest', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+      });
+      const msg = await res.json();
+      document.getElementById('response').innerText = msg.message;
+    });
+  </script>
+</body>
+</html>
