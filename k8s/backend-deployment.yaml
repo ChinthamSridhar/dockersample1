@@ -16,6 +16,27 @@ spec:
     spec:
       containers:
         - name: backend
-          image: kennethreitz/httpbin     # simple public API test container
+          image: acrpracticedev.azurecr.io/backend:6   # 👈 Update tag to latest
           ports:
-            - containerPort: 80
+            - containerPort: 3000
+          env:
+            - name: DB_USER
+              value: admin
+            - name: DB_PASS
+              value: admin123
+            - name: DB_NAME
+              value: k8sdemo
+            - name: DB_HOST
+              value: postgres-service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+spec:
+  selector:
+    app: backend
+  ports:
+    - port: 80
+      targetPort: 3000
+  type: ClusterIP
