@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: acrpracticedev.azurecr.io/frontend:7
+          image: acrpracticedev.azurecr.io/frontend:8
           ports:
             - containerPort: 80
 ---
