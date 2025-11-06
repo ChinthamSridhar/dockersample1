@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: acrpracticedev.azurecr.io/backend:latest   # 👈 Update tag to latest
+          image: acrpracticedev.azurecr.io/backend:latest
           ports:
             - containerPort: 3000
           env:
