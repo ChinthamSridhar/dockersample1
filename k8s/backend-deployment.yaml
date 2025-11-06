@@ -19,15 +19,11 @@ spec:
           image: acrpracticedev.azurecr.io/backend:8
           ports:
             - containerPort: 3000
-          env:
-            - name: DB_USER
-              value: admin
-            - name: DB_PASS
-              value: admin123
-            - name: DB_NAME
-              value: k8sdemo
-            - name: DB_HOST
-              value: postgres-service
+          envFrom:
+            - configMapRef:
+                name: app-config
+            - secretRef:
+                name: app-secrets
 ---
 apiVersion: v1
 kind: Service

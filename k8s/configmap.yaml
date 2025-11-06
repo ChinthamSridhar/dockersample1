@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: configMap
+metadata:
+  name: app-config
+data:
+  DB_NAME: k8sdemo
+  DB_HOST: postgres-service
