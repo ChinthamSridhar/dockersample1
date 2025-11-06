@@ -26,11 +26,14 @@ pool.query(`
   );
 `);
 
-// API endpoint
+// API endpoint - insert
 app.post('/api/interest', async (req, res) => {
   const { username, phone, interested } = req.body;
   try {
-    await pool.query('INSERT INTO interests (username, phone, interested) VALUES ($1, $2, $3)', [username, phone, interested]);
+    await pool.query(
+      'INSERT INTO interests (username, phone, interested) VALUES ($1, $2, $3)',
+      [username, phone, interested]
+    );
     res.send({ message: 'Thanks for your response!' });
   } catch (err) {
     console.error(err);
@@ -38,9 +41,21 @@ app.post('/api/interest', async (req, res) => {
   }
 });
 
+// API endpoint - fetch all
 app.get('/api/interests', async (req, res) => {
-  const result = await pool.query('SELECT * FROM interests');
-  res.send(result.rows);
+  try {
+    const result = await pool.query('SELECT * FROM interests');
+    res.send(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ error: 'Failed to fetch data' });
+  }
 });
 
+// Health check
+app.get('/api/health', (req, res) => {
+  res.send('OK');
+});
+
+// ✅ Fixed typo here
 app.listen(3000, () => console.log('Backend running on port 3000'));
