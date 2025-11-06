@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: acrpracticedev.azurecr.io/backend:7
+          image: acrpracticedev.azurecr.io/backend:8
           ports:
             - containerPort: 3000
           env:
