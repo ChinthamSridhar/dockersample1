@@ -10,13 +10,13 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - grafanaworld.eastus.cloudapp.azure.com
-      secretName: grafana-tls
+        - myappdemo.eastus.cloudapp.azure.com
+      secretName: myappdemo-tls
   rules:
-    - host: grafanaworld.eastus.cloudapp.azure.com
+    - host: myappdemo.eastus.cloudapp.azure.com
       http:
         paths:
-          - path: /
+          - path: /grafana
             pathType: Prefix
             backend:
               service:
