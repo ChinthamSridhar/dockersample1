@@ -4,6 +4,8 @@ metadata:
   name: grafana-ingress
   namespace: monitoring
   annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
@@ -16,8 +18,8 @@ spec:
     - host: myappdemo.eastus.cloudapp.azure.com
       http:
         paths:
-          - path: /grafana
-            pathType: Prefix
+          - path: /grafana/?(.*)
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: monitoring-grafana
